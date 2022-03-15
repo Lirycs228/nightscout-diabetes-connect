@@ -1,7 +1,7 @@
 FROM node:17
 
-LABEL version="1.5.0"
-LABEL description="Script written in JavaScript (Node) that uploads CGM readings from LibreLink Up to Nightscout"
+LABEL version="0.0.1"
+LABEL description="Script written in JavaScript (Node) that uploads entries from Diabetes Connect to Nightscout"
 
 # Create app directory
 RUN mkdir -p /usr/src/app

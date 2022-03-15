@@ -1,7 +1,7 @@
 {
-  "name": "nightscout-librelink-up",
-  "version": "1.5.0",
-  "description": "Script written in JavaScript (Node) that uploads CGM readings from LibreLink Up to Nightscout",
+  "name": "nightscout-diabetes-connect",
+  "version": "0.0.1",
+  "description": "Script written in JavaScript (Node) that uploads entries from Diabetes Connect to Nightscout",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,27 +9,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/timoschlueter/nightscout-librelink-up.git"
+    "url": "git+https://github.com/Lirycs228/nightscout-diabetes-connect.git"
   },
   "keywords": [
     "nightscout",
-    "cgm",
+    "food",
     "diabetes",
     "blood",
     "sugar",
-    "freestyle",
-    "libre",
-    "librelink",
-    "librelink",
-    "up",
+    "connect",
+    "diabetesconnect",
     "uploader"
   ],
-  "author": "Timo Schlueter",
+  "author": "Erik Hammon",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/timoschlueter/nightscout-librelink-up/issues"
+    "url": "https://github.com/Lirycs228/nightscout-diabetes-connect/issues"
   },
-  "homepage": "https://github.com/timoschlueter/nightscout-librelink-up#readme",
+  "homepage": "https://github.com/Lirycs228/nightscout-diabetes-connect#readme",
   "dependencies": {
     "axios": "^0.26.0",
     "node-cron": "^3.0.0",

@@ -1,6 +1,6 @@
 {
-	"name": "Nightscout LibreLinkUp Uploader",
-	"description": "Uploads you Blood Glucose from LibreLinkUp to your Nightscout",
+	"name": "Nightscout Diabetes Connect Uploader",
+	"description": "Uploads you Blood Glucose from Diabetes Connect to your Nightscout",
 	"formation": {
 		"web": {
 			"quantity": 0,
@@ -12,13 +12,13 @@
 		}
 	},
 	"env": {
-		"LINK_UP_USERNAME": {
-			"description": "Your LibreLinkUp (LibreView) username/email address",
+		"DIABETES_CONNECT_USERNAME": {
+			"description": "Your Diabetes Connect (portal.diabetesconnect.de) username/email address",
 			"value": "",
 			"required": true
 		},
-		"LINK_UP_PASSWORD": {
-			"description": "Your LibreLinkUp (LibreView)",
+		"DIABETES_CONNECT_PASSWORD": {
+			"description": "Your LibreLinkUp iabetes Connect (portal.diabetesconnect.de) password",
 			"value": "",
 			"required": true
 		},
