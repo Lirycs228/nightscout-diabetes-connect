@@ -1,28 +1,29 @@
-# Nightscout LibreLink Up Uploader/Sidecar
-Simple Script written in JavaScript (Node) that uploads CGM readings from LibreLink Up to Nightscout. The upload happens every minute and should work with at least Freestyle Libre 2 and Libre 3 CGM sensors.
+# Nightscout Diabetes Connect Uploader/Sidecar
+Simple Script written in JavaScript (Node) that uploads entries from Diabetes Connect to Nightscout. The upload happens every 5 minutes.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/timoschlueter/nightscout-librelink-up)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/lirycs228/nightscout-diabetes-connect)
 
 ## Configuration
 The script takes the following environment variables
 
 |Variable| Description                                                                                             | Example                                  |Required|
 |---|---------------------------------------------------------------------------------------------------------|------------------------------------------|---|
-|LINK_UP_USERNAME| LibreLink Up Login Email                                                                                | mail@example.com                         |X|
-|LINK_UP_PASSWORD| LibreLink Up Login Password                                                                             | mypassword                               |X|
-|LINK_UP_CONNECTION| LibreLink Up Patient-ID. Can be received from the console output if multiple connections are available. | 123456abc-abcd-efgh-7891def              ||
+|DIABETES_CONNECT_USERNAME| Diabetes Connect Login Email                                                                                | mail@example.com                         |X|
+|DIABETES_CONNECT_PASSWORD| Diabetes Connect Login Password                                                                             | mypassword                               |X|
 |NIGHTSCOUT_URL| Hostname of the Nightscout instance (without https://)                                                  | nightscout.yourdomain.com                |X|
-|NIGHTSCOUT_API_TOKEN| SHA1 Hash of Nightscout access token                                                                    | 162f14de46149447c3338a8286223de407e3b2fa |X|
+|NIGHTSCOUT_API_TOKEN| Nightscout access token                                                                    | diabetesco-abc123def456ghi7 |X|
+
+
+Keep in mind that the script currently only uses values in mg/dl and assumes a x5 factor from diabetes connect meals to nightscout carbs
 
 ## Usage
 There are different options for using this script.
 
 ### Variant 1: On Heroku
 
-- Click [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/timoschlueter/nightscout-librelink-up)
+- Click [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/lirycs228/nightscout-diabetes-connect)
 - Login to Heroku if not already happened
 - Provide proper values for the `environment variables`
-- **Important: make sure that yor Nightscout API token is hashed with SHA1**
 - Click `Deploy` to deploy the app
 
 ### Variant 2: Local
@@ -33,11 +34,10 @@ To start the process simply create a bash script with the set environment variab
 
 ```
 #!/bin/bash
-export LINK_UP_USERNAME="mail@example.com"
-export LINK_UP_PASSWORD="mypassword"
+export DIABETES_CONNECT_USERNAME="mail@example.com"
+export DIABETES_CONNECT_PASSWORD="mypassword"
 export NIGHTSCOUT_URL="nightscout.yourdomain.com"
-# use `shasum` instead of `sha1sum` on Mac
-export NIGHTSCOUT_API_TOKEN=$(echo -n "foo-bar-baz" | sha1sum | cut -d ' ' -f 1)
+export NIGHTSCOUT_API_TOKEN=diabetesco-abc123def456ghi7
 
 npm start
 ```
@@ -48,10 +48,10 @@ Execute the script and check the console output.
 The easiest way to use this is to use the latest docker image:
 
 ```
-docker run -e LINK_UP_USERNAME="mail@example.com" \
-            -e LINK_UP_PASSWORD="mypassword" \
+docker run -e DIABETES_CONNECT_USERNAME="mail@example.com" \
+            -e DIABETES_CONNECT_PASSWORD="mypassword" \
             -e NIGHTSCOUT_URL="nightscout.yourdomain.com" \
-            -e NIGHTSCOUT_API_TOKEN="librelinku-123456789abcde" timoschlueter/nightscout-librelink-up
+            -e NIGHTSCOUT_API_TOKEN="diabetesco-abc123def456ghi7" ghcr.io/lirycs228/nightscout-diabetes-connect
 ```
 
 ### Variant 4: Docker Compose
@@ -61,15 +61,12 @@ If you are already using a dockerized Nightscout instance, this image can be eas
 version: '3.7'
 
 services:
-  nightscout-libre-link:
-    image: timoschlueter/nightscout-librelink-up
-    container_name: nightscout-libre-link
+  nightscout-diabetes-connect:
+    image: ghcr.io/lirycs228/nightscout-diabetes-connect
+    container_name: nightscout-diabetes-connect
     environment:
-      LINK_UP_USERNAME: "mail@example.com"
-      LINK_UP_PASSWORD: "mypassword"
+      DIABETES_CONNECT_USERNAME: "mail@example.com"
+      DIABETES_CONNECT_PASSWORD: "mypassword"
       NIGHTSCOUT_URL: "nightscout.yourdomain.com"
-      NIGHTSCOUT_API_TOKEN: "librelinku-123456789abcde"
+      NIGHTSCOUT_API_TOKEN: "diabetesco-abc123def456ghi7"
 ```
-
-## ToDo
-- **Integration into Nightscout**: I have not yet looked into the plugin architecture of Nightscout. Maybe this should be converted into a plugin.

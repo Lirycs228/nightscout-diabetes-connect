@@ -54,7 +54,7 @@ const nightScoutHttpHeaders = {
 }
 
 logger.info("Started")
-cron.schedule("* * * * *", () => {
+cron.schedule("*/5 * * * *", () => {
     main();
 });
 
@@ -64,7 +64,7 @@ function main() {
 
 async function getEntries() {
 
-    const url = "https://" + API_URL + "/eintraege/paged.json?take=50&skip=0&page=1&pageSize=50";
+    const url = "https://" + API_URL + "/eintraege/paged.json?take=10&skip=0&page=1&pageSize=10";
 
     let authenticatedHttpHeaders = libreLinkUpHttpHeaders;
     let encoded_credentials = Buffer.from(DIABETES_CONNECT_USERNAME + ":" + DIABETES_CONNECT_PASSWORD, 'binary').toString('base64')
