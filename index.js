@@ -81,7 +81,7 @@ async function getEntries() {
         logger.info("Received entries");
         uploadToNightscout(entryData);
     } catch (error) {
-        logger.error("Invalid credentials");
+        logger.error("Invalid credentials: " + error);
     }
 }
 
@@ -122,7 +122,7 @@ async function uploadToNightscout(entryData) {
 
         logger.info("Upload of " + formattedEntries.length + " entries to Nightscout successfull");
     } catch (error) {
-        logger.error("Upload to Nightscout failed");
+        logger.error("Upload to Nightscout failed: " + error);
     }
 }
 
